@@ -1,4 +1,4 @@
-const API_URL = "http://192.168.165.10:8000";
+const API_URL = "/api";
 
 const input = document.querySelector('input[type="text"]');
 const addButton = document.querySelector('button');
