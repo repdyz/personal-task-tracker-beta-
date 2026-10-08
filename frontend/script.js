@@ -1,3 +1,5 @@
+const API_URL = "http://192.168.165.10:8000";
+
 const input = document.querySelector('input[type="text"]');
 const addButton = document.querySelector('button');
 const taskList = document.getElementById("task-list");
@@ -19,7 +21,7 @@ function renderTask(task) {
     checkbox.addEventListener("change", async function () {
         const newStatus = checkbox.checked ? "completed" : "pending";
 
-        await fetch(`http://127.0.0.1:8000/tasks/${task.id}?status=${newStatus}`, {
+        await fetch(`${API_URL}/tasks/${task.id}?status=${newStatus}`, {
             method: "PATCH"
         });
     });
@@ -27,7 +29,7 @@ function renderTask(task) {
     const deleteButton = li.querySelector(".delete-button");
 
     deleteButton.addEventListener("click", async function () {
-        await fetch(`http://127.0.0.1:8000/tasks/${task.id}`, {
+        await fetch(`${API_URL}/tasks/${task.id}`, {
             method: "DELETE"
         });
 
@@ -44,7 +46,7 @@ addButton.addEventListener('click', async function () {
         return;
     }
 
-    const response = await fetch("http://127.0.0.1:8000/tasks", {
+    const response = await fetch(`${API_URL}/tasks`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -62,7 +64,7 @@ addButton.addEventListener('click', async function () {
 });
 
 async function loadTasks(status = "") {
-    let url = "http://127.0.0.1:8000/tasks";
+    let url = `${API_URL}/tasks`;
 
     if (status !== "") {
         url += `?status=${status}`;
